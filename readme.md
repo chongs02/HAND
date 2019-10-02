@@ -5,8 +5,8 @@
 
 **backend**
 `django` : 2.2.5
-`rest_framework` : 3.10.3
-`corsheaders` : 3.1.1
+`djangorestframework` : 3.10.3
+`django-cors-headers` : 3.1.1
 
 
 1. folder 구조를 front와 back으로 나눈다
