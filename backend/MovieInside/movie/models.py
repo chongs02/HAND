@@ -1,6 +1,8 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 # Create your models here.
+
 
 class MovieEmotion(models.Model):
 
@@ -16,6 +18,8 @@ class MovieEmotion(models.Model):
     gratifying = models.PositiveSmallIntegerField()   # 통쾌함
     immersion = models.PositiveSmallIntegerField()    # 몰입감
 
+    owner = models.ForeignKey(User, related_name="movieemotion",
+                              on_delete=models.CASCADE, null=True)
+
     def __str__(self):
         return self.movie_title
-

@@ -40,14 +40,18 @@ INSTALLED_APPS = [
     'movie',                                  # 추가
     'api',                                    # 추가
     'rest_framework',                         # 추가
+    'knox',
     'corsheaders'                             # 추가
 ]
 
 REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-    ]
+    # 'DEFAULT_PERMISSION_CLASSES': [
+    #     'rest_framework.permissions.AllowAny'
+    # ]
+    'DEFAULT_AUTHENTICATION_CLASSES': ('knox.auth.TokenAuthentication',),
 }
+
+# CSRF_COOKIE_NAME = "csrftoken"
 
 MIDDLEWARE = [
     'corsheaders.middleware.CorsMiddleware',     # 추가
@@ -62,8 +66,8 @@ MIDDLEWARE = [
 
 CORS_ORIGIN_WHITELIST = [
     'http://localhost:3000',            # 추가
-    'http://localhost:8000',            # 추가
-    ]
+    # 'http://localhost:8000',            # 추가
+]
 
 
 ROOT_URLCONF = 'MovieInside.urls'
@@ -72,6 +76,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
+            os.path.join(BASE_DIR, 'frontend', 'movieinside', 'build')  # 수정
         ],
         'APP_DIRS': True,
         'OPTIONS': {
@@ -84,6 +89,11 @@ TEMPLATES = [
         },
     },
 ]
+
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'frontend', 'movieinside', 'build', 'static')  # 수정
+]
+
 
 WSGI_APPLICATION = 'MovieInside.wsgi.application'
 

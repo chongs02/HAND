@@ -1,39 +1,20 @@
-import React from 'react';
-import Nav from './components/Nav'
-import Contents from "./components/Contents"
-import Footer from "./components/Footer"
-import "./App.css"
+import { Provider } from "react-redux";
+import { Route, Switch, BrowserRouter } from "react-router-dom";
+import Movie from "./components/Movie";
+import Login from "./components/Login";
 
-export default class App extends React.Component{
-  state = {
-    movieEmotion:[]
-  }
-
-  async componentDidMount(){
-    try{
-      const response = await fetch('http://127.0.0.1:8000/api/')
-      const emotion = await response.json()
-      this.setState({
-        movieEmotion: emotion
-      })
-    } catch(e){
-      console.log(e)
-    }
-  }
-
-  render(){
-    return(
-    <div className="main">
-      <Nav></Nav>
-      { this.state.movieEmotion.map((item)=>{
-
-      return <Contents key={item.id} movie_code={item.movie_code} movie_title={item.movie_title} 
-      sad={item.sad} fear={item.fear} gratifying={item.gratifying} 
-      immersion={item.immersion} depress={item.depress} lightness={item.lightness} ></Contents>
-
-      })}
-      <Footer></Footer>
-  </div>
-  )
+export default class App extends React.Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" component={Movie} />
+            <Route exact path="/login" component={Login} />
+            <Route component={NotFound} />
+          </Switch>
+        </BrowserRouter>
+      </Provider>
+    );
   }
 }
