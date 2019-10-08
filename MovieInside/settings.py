@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'webpack_loader',
     'movie',                                  # 추가
     'api',                                    # 추가
     'notes',
@@ -44,6 +45,13 @@ INSTALLED_APPS = [
     'knox',
     'corsheaders'                             # 추가
 ]
+
+WEBPACK_LOADER = {
+    'DEFAULT': {
+        'BUNDLE_DIR_NAME': 'bundles/',
+        'STATS_FILE': os.path.join(BASE_DIR, 'webpack-stats.dev.json'),
+    }
+}
 
 REST_FRAMEWORK = {
     # 'DEFAULT_PERMISSION_CLASSES': [
@@ -77,7 +85,7 @@ TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
         'DIRS': [
-            os.path.join(BASE_DIR, 'frontend', 'movieinside', 'build')  # 수정
+            os.path.join(os.path.join(BASE_DIR, "templates"), )  # 수정
         ],
         'APP_DIRS': True,
         'OPTIONS': {
